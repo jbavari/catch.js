@@ -18,13 +18,13 @@ describe('Window global functions', function() {
     // afterEach(function(){});
 
 	it('Should catch global function errors when attaching to the window object', function(){
-        // spyOn(errorHandler, 'sendErrorToServer');
+        spyOn(errorHandler, 'sendErrorToServer');
 
         Ajaxpect.addAround(window, errorHandler.interceptionMethods, errorHandler.interceptTryCatch);
 
         windowFailMethod();
 
-        // expect(errorHandler.sendErrorToServer).toHaveBeenCalled();
+        expect(errorHandler.sendErrorToServer).toHaveBeenCalled();
 
         // Ajaxpect.addAround(window, errorHandler.interceptionMethods, errorHandler.interceptTryCatch);
         // app.errorFunc();

@@ -29,7 +29,7 @@ var ErrorHandler = function(app_reference){
 		//Here we are guaranteed the name coming in is a function, not a property or object
 		var shouldIntercept = true;
 
-		if(name != undefined && name != null) {
+		if(name !== undefined && name !== null) {
 			shouldIntercept = false;
 		}
 
@@ -65,19 +65,19 @@ var ErrorHandler = function(app_reference){
 			//app.log("Interception occuring - function being called: " + callingFunctionName + " && the caller: " + callerFunctionName);
 			//app.log("Interception args count: " + args.length);
 
-			if(args.length == 0) { 
+			if(args.length === 0) { 
 				return orig();
-			} else if(args.length == 1) {
+			} else if(args.length === 1) {
 				return orig(args[0]);
-			} else if(args.length == 2) {
+			} else if(args.length === 2) {
 				return orig(args[0], args[1]);
-			} else if(args.length == 3) {
+			} else if(args.length === 3) {
 				return orig(args[0], args[1], args[2]);
-			} else if(args.length == 4) {
+			} else if(args.length === 4) {
 				return orig(args[0], args[1], args[2], args[3]);
-			} else if(args.length == 5) {
+			} else if(args.length === 5) {
 				return orig(args[0], args[1], args[2], args[3], args[4]);
-			} else if(args.legnth == 6) {
+			} else if(args.legnth === 6) {
 				return orig(args[0], args[1], args[2], args[3], args[4], args[5]);
 			}
 		} catch (ex) {
@@ -89,35 +89,28 @@ var ErrorHandler = function(app_reference){
 			self.sendErrorToServer(errorMessage, "RM-500", function(){app.log("ErrorHandler - interceptTryCatch done reporting to server"); } );
 			// self.reportErrorToServer(ex, orig.name, stackInfo);
 		}
-	},
+	};
 	
-	self.handleAjaxComplete = function(event, jqxhr, settings) {
-		app.log("ErrorHandler - jQuery global ajaxComplete being called");
-		// app.log("Event: " + JSON.stringify(event));
-
-		
-		var jsonResponse;
+	self.handleAjaxComplete = function(event, jqxhr, settings) {		
+		var jsonResponse = null;
 		var isJson = true;
-		if(jqxhr.responseText != null){
+
+		if(jqxhr.responseText !== null){
 			try {
 				jsonResponse = JSON.parse(jqxhr.responseText);
-				// app.log("ErrorHandler - json response failed to parse");
 			} catch (ex) {
-				// app.log("ErrorHandler - json response failed to parse");
-				// app.log(jqxhr.responseText);
 				isJson = false;
 			}
 		}
 		
-		if(jsonResponse != null && jsonResponse.success && jsonResponse.success == false) {
-			// app.log("ErrorHandler - ajaxComplete - but false success response. Reporting");
+		if(jsonResponse !== null && jsonResponse.success && jsonResponse.success === false) {
 			//Need to report error, unless server already knows about it..
 			var errorMessage = "False returned. Message: " + JSON.stringify(jsonResponse);
 			errorMessage += " \r\n URL: " + settings.url;
 			self.sendErrorToServer(errorMessage, self.jsonResponseFailCode, null);
 		}
-	};
-	
+	};	
+
 	self.handleAjaxError = function(event, jqxhr, settings, exception) {
 		app.log("ErrorHandler - jQuery global ajaxError being called");
 		//app.log("Params: event: " + JSON.stringify(event));
@@ -240,22 +233,24 @@ var ErrorHandler = function(app_reference){
 	self.sendErrorQueueToServer = function() {
 		var errorUrl = "http://localhost:3000/catch/jserror";
 		var postData = { 
-							error_list: self.errorQueue,
-			 				user_id: app.user.id,
-							build_number: buildNumber
-						};
+			error_list: self.errorQueue,
+				user_id: app.user.id,
+			build_number: buildNumber
+		};
 		try
 		{
 			$.ajax({type: 'POST',
 					url: errorUrl,
 					data: postData,
 					success: function(data) { 
-						if ( data == false) { app.log("ErrorHandler - Failed on sending error!"); }
+						if ( data === false) {
+							console.log("ErrorHandler - Failed on sending error!"); 
+						}
 						else {
-							app.log("ErrorHandler - sendErrorQueueToServer - completed");
 							self.lastQueueSendTime = new Date();
-							if(callBack)
+							if(callBack) {
 								callBack();
+							}
 						}
 					}, 
 					error: function(data) {

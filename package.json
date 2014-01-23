@@ -1,0 +1,19 @@
+{
+  "name": "Catch.js",
+  "description": "A Javascript library focused on wrapping functions in try/catch blocks to provide better error catching and reporting.",
+  "author": {
+    "name": "Josh Bavari",
+    "email": "jbavari@gmail.com",
+    "url": "http://jbavari.github.io/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:raisemore/mobile_raisemore.git"
+  },
+  "version": "0.1.1",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-uglify": "~0.3.1"
+  }
+}

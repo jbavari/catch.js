@@ -12,8 +12,8 @@ var Ajaxpect = {
     var link = function(orig) {
       return function() {
         return orig.apply(this, before(arguments, orig, this));
-      }
-    }
+      };
+    };
     this._process(obj, filter, link);
   },
 
@@ -21,8 +21,8 @@ var Ajaxpect = {
     var link = function(orig) {
       return function() {
         return after(orig.apply(this, arguments), arguments, orig, this);
-      }
-    }
+      };
+    };
     this._process(obj, filter, link);
   },
 
@@ -30,17 +30,17 @@ var Ajaxpect = {
     var link = function(orig) {
       return function() {
         return around(arguments, orig, this);
-      }
-    }
+      };
+    };
     this._process(obj, filter, link);
   },
   
   _process: function(obj, filter, link) {
     var check;
     if (filter.exec) {
-      check = function(str) { return filter.exec(str) }
+      check = function(str) { return filter.exec(str); };
     } else if (filter.call) {
-      check = function(str) { return filter.call(this, str) }
+      check = function(str) { return filter.call(this, str); };
     }
     if (check) {
       for (var member in obj) {
@@ -58,4 +58,4 @@ var Ajaxpect = {
     obj[member] = link(orig);
   }
   
-}
+};

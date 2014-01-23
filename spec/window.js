@@ -17,7 +17,7 @@ describe('Window global functions', function() {
 
     // afterEach(function(){});
 
-	it('Should do something', function(){
+	it('Should catch global function errors when attaching to the window object', function(){
         // spyOn(errorHandler, 'sendErrorToServer');
 
         Ajaxpect.addAround(window, errorHandler.interceptionMethods, errorHandler.interceptTryCatch);

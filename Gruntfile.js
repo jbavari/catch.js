@@ -22,6 +22,15 @@ module.exports = function(grunt) {
           'js/catch.min.js': ['js/ajaxpect.js', 'js/ErrorHandler.js']
         }
       }
+    },
+    jasmine: {
+      tests: {
+        src: 'js/*.js',
+        options: {
+          specs: 'spec/*.js',
+          helpers: 'spec/*Helper.js'
+        }
+      }
     }
   });
 

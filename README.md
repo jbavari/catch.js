@@ -37,6 +37,8 @@ Catch.init( App );
 Catch.init( [App, $, async] );
 ```
 
+### Configuration to catch any errors on the App object. The second parameter is a filtering function, by returning true, it matches that function to be try/catch'ed.
+
 ```js
 Catch.init( App, function() { return true; } );
 ```
@@ -56,8 +58,10 @@ Catch.init({
 		switch(name){
 			case "log":
 			case "alert":
-			case "docum"
+				return true;
 		};
+		//Didnt match, so we return a false
+		return false;
 	}
 });
 ```

@@ -19,37 +19,39 @@ Catch.init(config [, functionReturningTrueOnMethodsToCatch]);
 $ npm install catchjs
 ```
 
-## Basic configuration to catch all global errors
+### Basic configuration to catch all global errors
 
 ```js
 Catch.init();
 ```
 
-## Configuration to catch any errors on the App object
+### Configuration to catch any errors on the App object
 
 ```js
 Catch.init( App );
 ```
 
-## Configuration to catch any errors on an array of objects
+### Configuration to catch any errors on an array of objects
 
 ```js
 Catch.init( [App, $, async] );
 ```
 
-### Configuration to catch any errors on the App object. The second parameter is a filtering function, by returning true, it matches that function to be try/catch'ed.
+### Configuration to catch any errors on the App object. 
+
+The second parameter is a filtering function, by returning true, it matches that function to be try/catch'ed.
 
 ```js
 Catch.init( App, function() { return true; } );
 ```
 
-## Configuration to catch any errors on App object but only on the 'log' method
+### Configuration to catch any errors on App object but only on the 'log' method
 
 ```js
 Catch.init( App, function(name) { if(name === 'log') { return true; } else { return false; } } );
 ```
 
-## Configuration to catch any errors on objects with filtering function
+### Configuration to catch any errors on objects with filtering function
 
 ```js
 Catch.init({

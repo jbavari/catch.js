@@ -13,22 +13,18 @@ My initial plan was to help set this up on Phonegap / Cordova - that way you can
 
 ## Getting Started
 
-Catch.init(config [, functionReturningTrueOnMethodsToCatch]);
+Catch.on( YourObject, function returnsTrueOnMethodsToCatch() {} );
+
+<!-- Catch.init(config [, functionReturningTrueOnMethodsToCatch]); -->
 
 ```bash
 $ npm install catchjs
 ```
 
-### Basic configuration to catch all global errors
-
-```js
-Catch.init();
-```
-
 ### Configuration to catch any errors on the App object
 
 ```js
-Catch.init( App );
+Catch.on( App );
 ```
 
 ### Configuration to catch any errors on an array of objects
